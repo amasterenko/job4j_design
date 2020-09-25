@@ -22,25 +22,18 @@ public class EvenNumbersIterator implements Iterator<Integer> {
         this.data = data;
     }
 
-    private int findNextEvenIndx() {
-         int indx;
-         indx = pointer;
-         while (indx != data.length) {
-             if (data[indx] % 2 == 0) {
-                 return indx;
-             }
-             indx++;
-         }
-         return -1;
-    }
-
     @Override
     public boolean hasNext() {
         if (pointer == -1) {
             return false;
         }
-        pointer = findNextEvenIndx();
-        return pointer != -1;
+        while (pointer != data.length) {
+            if (data[pointer] % 2 == 0) {
+                return true;
+            }
+            pointer++;
+        }
+        return false;
     }
 
     @Override
