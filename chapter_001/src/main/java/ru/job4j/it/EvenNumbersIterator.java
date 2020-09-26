@@ -24,9 +24,6 @@ public class EvenNumbersIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        if (pointer == -1) {
-            return false;
-        }
         while (pointer != data.length) {
             if (data[pointer] % 2 == 0) {
                 return true;
