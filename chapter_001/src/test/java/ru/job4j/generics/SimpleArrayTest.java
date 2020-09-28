@@ -22,11 +22,11 @@ public class SimpleArrayTest {
         assertThat(simpleArray.get(0), is("1"));
     }
 
-    @Test()
+    @Test(expected = IndexOutOfBoundsException.class)
     public void whenWrongIndexWhileGet() {
         SimpleArray<String> simpleArray = new SimpleArray<>(1);
         simpleArray.add("1");
-        assertThat(simpleArray.get(1), isEmptyOrNullString());
+        simpleArray.get(1);
     }
 
     @Test()

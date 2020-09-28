@@ -70,11 +70,7 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public T get(int index) {
-        try {
-            return array[Objects.checkIndex(index, lastElementIndx + 1)];
-        } catch (Exception e) {
-            return null;
-        }
+        return array[Objects.checkIndex(index, lastElementIndx + 1)];
     }
 
     @Override
