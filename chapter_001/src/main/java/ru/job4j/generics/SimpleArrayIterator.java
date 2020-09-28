@@ -9,9 +9,9 @@ public class SimpleArrayIterator<T> implements Iterator<T> {
     private final int size;
     private int pointer = 0;
 
-    public SimpleArrayIterator(T[] array) {
+    public SimpleArrayIterator(T[] array, int size) {
         this.array = array;
-        this.size = array.length;
+        this.size = size;
     }
 
     @Override

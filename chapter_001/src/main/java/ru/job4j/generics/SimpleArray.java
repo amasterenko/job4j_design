@@ -25,18 +25,8 @@ public class SimpleArray<T> implements Iterable<T> {
         if (lastElementIndx == -1) {
             return Collections.EMPTY_LIST.iterator();
         }
-        return new SimpleArrayIterator<>(Arrays.copyOfRange(array, 0, lastElementIndx + 1));
-    }
-
-    @Override
-    public void forEach(Consumer<? super T> action) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Spliterator<T> spliterator() {
-        throw new UnsupportedOperationException();
-    }
+        return new SimpleArrayIterator<>(array, lastElementIndx + 1);
+}
 
     public boolean add(T model) {
         try {
