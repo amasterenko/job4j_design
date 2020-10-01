@@ -1,9 +1,6 @@
 package ru.job4j.collection;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class SimpleLinkedList<E> implements Iterable<E> {
@@ -21,7 +18,6 @@ public class SimpleLinkedList<E> implements Iterable<E> {
             first = newNode;
         }
         last = newNode;
-        first.nextNode = last;
         modCounter++;
         return size++;
     }
@@ -37,24 +33,30 @@ public class SimpleLinkedList<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
+        if (size == 0) {
+            return Collections.EMPTY_LIST.iterator();
+        }
         return new SimpleLinkedListIterator<>(this);
     }
 
     private static class SimpleLinkedListIterator<E> implements Iterator<E> {
         SimpleLinkedList<E> list;
         private int expectedModCounter;
-        private int pointer = 0;
-        private int size;
+        private Node<E> pointer = null;
+        private int listSize;
 
         public SimpleLinkedListIterator(SimpleLinkedList<E> list) {
             this.list = list;
             this.expectedModCounter = list.modCounter;
-            this.size = list.size;
+            this.listSize = list.size;
         }
 
         @Override
         public boolean hasNext() {
-            return pointer < size;
+            if (listSize == 1 && pointer == null) {
+                return true;
+            }
+            return pointer.nextNode != null;
         }
 
         @Override
@@ -65,7 +67,8 @@ public class SimpleLinkedList<E> implements Iterable<E> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            return list.get(pointer++);
+            pointer = listSize != 1 ? pointer.nextNode : list.first;
+            return pointer.item;
         }
 
         @Override
