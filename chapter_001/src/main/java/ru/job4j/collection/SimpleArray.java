@@ -1,8 +1,7 @@
 package ru.job4j.collection;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Consumer;
 
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] container;
@@ -47,15 +46,54 @@ public class SimpleArray<T> implements Iterable<T> {
         return newContainer;
     }
 
-    int getModCounter() {
-        return modCounter;
-    }
+    //int getModCounter() {
+       // return modCounter;
+    //}
 
     @Override
     public Iterator<T> iterator() {
         if (elementsCounter == 0) {
             return Collections.EMPTY_LIST.iterator();
         }
-        return new SimpleArrayIterator<>(this, elementsCounter);
+        return new SimpleArrayIterator<>(this);
+    }
+
+    private static class SimpleArrayIterator<T> implements Iterator<T> {
+        private final SimpleArray<T> array;
+        private final int size;
+        private int pointer = 0;
+        private int expectedModCounter;
+
+        public SimpleArrayIterator(SimpleArray<T> array) {
+            this.array = array;
+            this.size = array.length;
+            this.expectedModCounter = array.modCounter;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return pointer < size;
+        }
+
+        @Override
+        public T next() {
+            if (expectedModCounter != array.modCounter) {
+                throw new ConcurrentModificationException();
+            }
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return array.get(pointer++);
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void forEachRemaining(Consumer action) {
+            throw new UnsupportedOperationException();
+        }
     }
 }
