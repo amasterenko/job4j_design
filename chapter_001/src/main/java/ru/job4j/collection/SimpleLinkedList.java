@@ -42,21 +42,17 @@ public class SimpleLinkedList<E> implements Iterable<E> {
     private static class SimpleLinkedListIterator<E> implements Iterator<E> {
         SimpleLinkedList<E> list;
         private int expectedModCounter;
-        private Node<E> pointer = null;
-        private int listSize;
+        private Node<E> pointer;
 
         public SimpleLinkedListIterator(SimpleLinkedList<E> list) {
             this.list = list;
             this.expectedModCounter = list.modCounter;
-            this.listSize = list.size;
+            this.pointer = list.first;
         }
 
         @Override
         public boolean hasNext() {
-            if (listSize == 1 && pointer == null) {
-                return true;
-            }
-            return pointer.nextNode != null;
+            return pointer != null;
         }
 
         @Override
@@ -67,8 +63,9 @@ public class SimpleLinkedList<E> implements Iterable<E> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
-            pointer = listSize != 1 ? pointer.nextNode : list.first;
-            return pointer.item;
+            E rsl = pointer.item;
+            pointer = pointer.nextNode;
+            return rsl;
         }
 
         @Override
