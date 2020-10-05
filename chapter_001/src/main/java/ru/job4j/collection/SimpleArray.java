@@ -66,7 +66,7 @@ public class SimpleArray<T> implements Iterable<T> {
 
         public SimpleArrayIterator(SimpleArray<T> array) {
             this.array = array;
-            this.size = array.length;
+            this.size = array.elementsCounter;
             this.expectedModCounter = array.modCounter;
         }
 
