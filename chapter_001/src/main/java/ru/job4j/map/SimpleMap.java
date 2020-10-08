@@ -2,10 +2,7 @@ package ru.job4j.map;
 
 import ru.job4j.collection.SimpleSet;
 
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class SimpleMap<K, V> implements Iterable<K> {
@@ -35,8 +32,8 @@ public class SimpleMap<K, V> implements Iterable<K> {
         if (initSize < 1) {
             throw new IllegalArgumentException("Initial size must be equal to or grater than 1.");
         }
-        if (loadFactor <= 0 || loadFactor > 1) {
-            throw new IllegalArgumentException("Load factor must be in the range of (0..1]");
+        if (loadFactor <= 0 || loadFactor >= 1) {
+            throw new IllegalArgumentException("Load factor must be in the range of (0..1)");
         }
         this.size = initSize;
         this.array = new Object[initSize];
@@ -65,13 +62,14 @@ public class SimpleMap<K, V> implements Iterable<K> {
         int hash = getHash(key);
         int index = getIndx(hash);
         Entry<K, V> e = (Entry<K, V>) array[index];
-        return e != null ? e.value : null;
+        return e != null && Objects.equals(e.key, key) ? e.value : null;
     }
 
     public boolean delete(K key) {
         int hash = getHash(key);
         int index = getIndx(hash);
-        if (array[index] != null) {
+        Entry<K, V> e = (Entry<K, V>) array[index];
+        if (e != null && Objects.equals(e.key, key)) {
             array[index] = null;
             elementsCounter--;
             modCounter++;
@@ -97,7 +95,7 @@ public class SimpleMap<K, V> implements Iterable<K> {
     }
 
     private int getHash(K key) {
-        return (key != null) ? key.hashCode() ^ (key.hashCode() >>> 16) : 0;
+        return key != null ? key.hashCode() ^ (key.hashCode() >>> 16) : 0;
     }
 
     private int getIndx(int hash) {
@@ -110,7 +108,7 @@ public class SimpleMap<K, V> implements Iterable<K> {
             return newEntry.value;
         }
         Entry<K, V> entry = (Entry<K, V>) array[index];
-        if (entry.hash == newEntry.hash && entry.key.equals(newEntry.key)) {
+        if (entry.hash == newEntry.hash && Objects.equals(entry.key, newEntry.key)) {
             array[index] = newEntry;
             return entry.value;
         }
@@ -150,16 +148,6 @@ public class SimpleMap<K, V> implements Iterable<K> {
                     pointer++;
                 }
                 return null;
-            }
-
-            @Override
-            public void remove() {
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public void forEachRemaining(Consumer<? super K> action) {
-                throw new UnsupportedOperationException();
             }
         };
     }

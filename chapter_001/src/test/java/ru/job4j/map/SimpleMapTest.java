@@ -88,4 +88,25 @@ public class SimpleMapTest {
         assertThat(map.get("2"), is(20));
         assertThat(map.get("3"), is(30));
     }
+
+    @Test
+    public void whenInsertAndGetThenCollision() {
+        SimpleMap<String, Integer> map = new SimpleMap<>(5, 0.9f);
+        map.insert("s1s", 10);
+        //trying to put the next entry to the same cell(indx=4) of the simplemap's array
+        map.insert("s2s", 20);
+        assertThat(map.get("s1s"), is(10));
+        assertThat(map.get("s2s"), Matchers.nullValue());
+    }
+
+    @Test
+    public void whenInsertAndDeleteThenCollision() {
+        SimpleMap<String, Integer> map = new SimpleMap<>(5, 0.9f);
+        map.insert("s1s", 10);
+        //trying to put the next entry to the same cell(indx=4) of the simplemap's array
+        map.insert("s2s", 20);
+        assertThat(map.get("s1s"), is(10));
+        assertThat(map.delete("s2s"), is(false));
+        assertThat(map.get("s2s"), Matchers.nullValue());
+    }
 }
