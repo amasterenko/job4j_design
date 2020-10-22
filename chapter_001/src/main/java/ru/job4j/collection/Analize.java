@@ -6,10 +6,12 @@ import java.util.stream.Collectors;
 public class Analize {
     public static Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        Set<User> prevUsers = new HashSet<>(previous);
-        Set<Integer> prevId = previous.stream()
-                .map(u -> u.id)
-                .collect(Collectors.toSet());
+        Set<User> prevUsers = new HashSet<>();
+        Set<Integer> prevId = new HashSet<>();
+        for (User u: previous) {
+            prevUsers.add(u);
+            prevId.add(u.id);
+        }
         for (User u : current) {
             if (prevUsers.contains(u)) {
                 prevUsers.remove(u);
