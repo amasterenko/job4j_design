@@ -9,7 +9,7 @@ public class MultiplicationTable {
             for (int i = 1; i <= 10; i++) {
                 sOut.append(i).append("  ");
             }
-            sOut.append("\n");
+            sOut.append(System.lineSeparator());
             fileOut.write(sOut.toString().getBytes());
             sOut.setLength(0);
             for (int i = 1; i <= 10; i++) {
@@ -17,7 +17,7 @@ public class MultiplicationTable {
                 for (int j = 1; j <= 10; j++) {
                     sOut.append(i * j).append(i * j >= 10 ? " " : "  ");
                 }
-                sOut.append("\n");
+                sOut.append(System.lineSeparator());
                 fileOut.write(sOut.toString().getBytes());
                 sOut.setLength(0);
             }
