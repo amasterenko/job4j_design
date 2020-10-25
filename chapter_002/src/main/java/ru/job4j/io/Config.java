@@ -18,7 +18,7 @@ public class Config {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.length() == 0 || line.contains("##")) {
+                if (line.length() == 0 || line.contains("#")) {
                     continue;
                 }
                 values.put(line.split("=")[0], line.split("=")[1]);

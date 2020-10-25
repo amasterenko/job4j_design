@@ -10,7 +10,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment() {
-        String path = "./test/data/pair_without_comment.properties";
+        String path = "./data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
         assertThat(
@@ -18,7 +18,7 @@ public class ConfigTest {
                 is("Dr. Evil")
         );
     }
-
+    
     @Test
     public void whenPairsCommentsEmptyLine() {
         String path = "./data/pairs_comments_empty_lines.properties";
@@ -37,7 +37,7 @@ public class ConfigTest {
                 is("Mini-Me")
         );
         assertThat(
-                config.value("##Comment"),
+                config.value("#Comment"),
                 is(Matchers.nullValue())
         );
         assertThat(
