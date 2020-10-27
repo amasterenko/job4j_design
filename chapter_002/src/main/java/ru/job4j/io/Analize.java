@@ -1,18 +1,19 @@
 package ru.job4j.io;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Analize {
 
     public void unavailable(String source, String target) {
         String inputLine;
+        List<String> outList = new ArrayList<>();
         boolean isUnavailable = false;
         StringBuilder outputLine = new StringBuilder();
-        PrintWriter writer = null;
         String time = "";
         String type;
         try (BufferedReader reader = new BufferedReader(new FileReader(source))) {
-            writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)));
             while ((inputLine = reader.readLine()) != null) {
                 if (inputLine.isEmpty()) {
                     continue;
@@ -26,20 +27,22 @@ public class Analize {
                 if ((type.equals("200") || type.equals("300")) && isUnavailable) {
                     isUnavailable = false;
                     outputLine.append(time);
-                    writer.println(outputLine.toString());
+                    outList.add(outputLine.toString());
                     outputLine.setLength(0);
                 }
             }
+            if (isUnavailable) {
+                outputLine.append(time);
+                outList.add(outputLine.toString());
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                if (isUnavailable) {
-                    outputLine.append(time);
-                    writer.println(outputLine.toString());
-                }
-                writer.close();
-            }
+        }
+
+        try (PrintWriter writer = new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
+            outList.forEach(writer::println);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
