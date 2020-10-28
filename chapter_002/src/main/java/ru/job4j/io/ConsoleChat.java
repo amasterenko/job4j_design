@@ -80,7 +80,7 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat(".\\chapter_002\\data\\log.txt", ".\\chapter_002\\data\\answers.txt");
+        ConsoleChat cc = new ConsoleChat("./chapter_002/data/log.txt", "./chapter_002/data/answers.txt");
         cc.run();
     }
 }

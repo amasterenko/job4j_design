@@ -1,12 +1,7 @@
 Chat begins.
 User: 1
-Bot: ответ5
-User: стоп
+Bot: ответ3
 User: 2
-User: 3
-User: продолжить
-Bot: ответ4
-User: 5
-Bot: ответ4
+Bot: ответ5
 User: закончить
 Chat is over.
