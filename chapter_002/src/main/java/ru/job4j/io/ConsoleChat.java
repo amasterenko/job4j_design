@@ -50,6 +50,7 @@ public class ConsoleChat {
             while (isRunning) {
                 print("User: ");
                 String input = reader.readLine();
+                log.add(input + System.lineSeparator());
                 if (input.toLowerCase().equals(OUT)) {
                     isRunning = false;
                     continue;
@@ -79,7 +80,7 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) {
-        ConsoleChat cc = new ConsoleChat("log.txt", "answers.txt");
+        ConsoleChat cc = new ConsoleChat(".\\chapter_002\\data\\log.txt", ".\\chapter_002\\data\\answers.txt");
         cc.run();
     }
 }
