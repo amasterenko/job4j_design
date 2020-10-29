@@ -12,18 +12,27 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
+                    boolean isStop = false;
+                    String answer = "";
                     String str;
-                    boolean stop = false;
                     while (!(str = in.readLine()).isEmpty()) {
                         System.out.println(str);
-                        if (str.toLowerCase().contains("?msg=bye")) {
-                            stop = true;
+                        if (str.toLowerCase().contains("msg=")) {
+                            if (str.toLowerCase().contains("exit")) {
+                                isStop = true;
+                            }
+                            if (str.toLowerCase().contains("hello")) {
+                                answer = "Hello, dear friend!";
+                            } else {
+                                answer = str.split("=")[1].split(" ")[0];
+                            }
                         }
                     }
-                    if (stop) {
+                    if (isStop) {
                         break;
                     }
-                    out.write("HTTP/1.1 200 OK\r\n\\".getBytes());
+                    out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+                    out.write(answer.getBytes());
                 }
             }
         }
