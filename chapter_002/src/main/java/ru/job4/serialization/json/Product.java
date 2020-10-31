@@ -2,16 +2,17 @@ package ru.job4.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.*;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Product {
-    private String name;
-    private float weight;
-    private Manufacturer manufacturer;
-    private boolean isArchived;
-    private List<String> tradeMarks;
+    private final String name;
+    private final float weight;
+    private final Manufacturer manufacturer;
+    private final boolean isArchived;
+    private final List<String> tradeMarks;
 
     public Product(String name, float weight, Manufacturer manufacturer, boolean isArchived, String... tradeMarks) {
         this.name = name;
@@ -19,6 +20,26 @@ public class Product {
         this.manufacturer = manufacturer;
         this.tradeMarks = Arrays.asList(tradeMarks);
         this.isArchived = isArchived;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public Manufacturer getManufacturer() {
+        return manufacturer;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public List<String> getTradeMarks() {
+        return tradeMarks;
     }
 
     @Override
@@ -32,27 +53,10 @@ public class Product {
                 + '}';
     }
 
-    private static class Manufacturer {
-        private String name;
-        private String country;
-
-        public Manufacturer(String name, String country) {
-            this.name = name;
-            this.country = country;
-        }
-
-        @Override
-        public String toString() {
-            return "Manufacturer{"
-                    + "name\\country='" + name + "\\"
-                    + country + '\''
-                    + '}';
-        }
-    }
-
     public static void main(String[] args) {
         Product product = new Product("SuperiorHummer", 1.5f,
-                new Manufacturer("HummersAndNails", "Russia"), false, "Maul", "EasyPeasy", "Builder");
+                new Manufacturer("HummersAndNails", "Russia"),
+                false, "Maul", "EasyPeasy", "Builder");
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(product));
 
@@ -67,5 +71,8 @@ public class Product {
                                     + "}";
         final Product productMod = gson.fromJson(productJson, Product.class);
         System.out.println(productMod);
+
+        JSONObject productJsonObj = new JSONObject(product);
+        System.out.println(productJsonObj.toString());
     }
 }
