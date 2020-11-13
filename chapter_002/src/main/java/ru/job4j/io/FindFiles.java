@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class FindFiles {
     public static void main(String[] args) {
@@ -43,7 +44,8 @@ public class FindFiles {
     }
 
     public static List<Path> search(Path root, String pattern) throws IOException {
-        SearchFiles searcher = new SearchFiles(p -> p.toFile().getName().matches(pattern));
+        Pattern searchPattern = Pattern.compile(pattern);
+        SearchFiles searcher = new SearchFiles(p -> searchPattern.matcher(p.toFile().getName()).matches());
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
