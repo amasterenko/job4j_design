@@ -57,7 +57,7 @@ public class ImportDB {
     private User parseStr(String str) {
         String[] parsedStr = str.split(";");
         if (parsedStr.length != 2) {
-            throw new IllegalArgumentException("Wrong format of input file!");
+            throw new IllegalArgumentException("Wrong format of the input file!");
         }
         return new User(parsedStr[0], parsedStr[1]);
     }
