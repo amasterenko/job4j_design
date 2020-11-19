@@ -19,10 +19,10 @@ public class ImportDB {
         this.dump = dump;
     }
 
-    public List<User> load() throws IOException {
+    public List<User> load() throws Exception {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            rd.lines().forEach(s -> users.add(new User(s.split(";")[0], s.split(";")[1])));
+            rd.lines().forEach(s -> users.add(parseStr(s)));
         }
         return users;
     }
@@ -52,6 +52,14 @@ public class ImportDB {
             this.name = name;
             this.email = email;
         }
+    }
+
+    private User parseStr(String str) {
+        String[] parsedStr = str.split(";");
+        if (parsedStr.length != 2) {
+            throw new IllegalArgumentException("Wrong format of input file!");
+        }
+        return new User(parsedStr[0], parsedStr[1]);
     }
 
 
