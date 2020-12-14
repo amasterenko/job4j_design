@@ -7,11 +7,8 @@ import java.util.Map;
 public class SoftReferenceCache<K, V> {
     private Map<K, SoftReference<V>> map = new HashMap<>();
 
-    public V get(K key) {
-        if (map.isEmpty() || !map.containsKey(key) || map.get(key).get() == null) {
-            return null;
-        }
-        return map.get(key).get();
+    public SoftReference<V> get(K key) {
+        return map.get(key);
     }
 
     public void load(K key, V value) {

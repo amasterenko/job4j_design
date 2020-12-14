@@ -20,7 +20,7 @@ public class FileCache {
                 return null;
             }
         }
-        return cache.get(key);
+        return cache.get(key).get();
     }
 
     private void load(String key) throws IOException {
