@@ -22,11 +22,10 @@ public class CacheTest {
         assertThat(cache.size(), is(0));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenKeyNotFound() {
         FileCache cache = new FileCache(folder.getRoot().toPath());
         String result = cache.get("source.txt");
-        assertThat(result, is(nullValue()));
     }
 
     @Test

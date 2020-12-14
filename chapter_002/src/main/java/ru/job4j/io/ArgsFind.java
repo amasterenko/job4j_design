@@ -68,7 +68,10 @@ public class ArgsFind {
     public String getPattern() {
         String rsl = "";
         switch (parsedArgs.getOrDefault("opt", "")) {
-            case "-f" , "-r":
+            case "-r":
+                rsl = parsedArgs.getOrDefault("pattern", "");
+                break;
+            case "-f":
                 rsl = parsedArgs.getOrDefault("pattern", "");
                 break;
             case "-m":

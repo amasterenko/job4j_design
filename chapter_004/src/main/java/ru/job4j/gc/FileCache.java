@@ -13,19 +13,16 @@ public class FileCache {
     }
 
     public String get(String key) {
-        if (cache.get(key) == null) {
-            try {
-                load(key);
-            } catch (IOException e) {
-                return null;
-            }
+        if (cache.get(key) != null && cache.get(key).get() != null) {
+            return cache.get(key).get();
         }
-        return cache.get(key).get();
-    }
-
-    private void load(String key) throws IOException {
-        cache.load(key, Files.readString(Path.of(dir + "/" + key)));
-
+        try {
+            String fileContent = Files.readString(Path.of(dir + "/" + key));
+            cache.load(key, fileContent);
+            return fileContent;
+        } catch (IOException e) {
+            throw new IllegalArgumentException("There is no such file or the file can't be read!");
+        }
     }
 
     public int size() {
