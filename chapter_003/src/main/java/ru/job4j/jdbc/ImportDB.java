@@ -62,7 +62,6 @@ public class ImportDB {
         return new User(parsedStr[0], parsedStr[1]);
     }
 
-
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
         try (FileInputStream in = new FileInputStream("chapter_003/src/main/resources/app.properties")) {
