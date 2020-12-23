@@ -1,11 +1,13 @@
 package ru.job4j.design.srp;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.is;
 import org.junit.Test;
+
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.List;
+
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class ReportEngineTest {
 
@@ -62,8 +64,6 @@ public class ReportEngineTest {
         StringBuilder expect = new StringBuilder("Name; Hired; Fired; Salary;").append(System.lineSeparator());
                 for (int i = 2; i >= 0; i--) {
                 expect.append(workers.get(i).getName()).append(";")
-                        .append(workers.get(i).getHired()).append(";")
-                        .append(workers.get(i).getFired()).append(";")
                         .append(workers.get(i).getSalary()).append(";")
                         .append(System.lineSeparator());
                 }

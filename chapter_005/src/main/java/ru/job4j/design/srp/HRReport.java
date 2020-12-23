@@ -2,8 +2,6 @@ package ru.job4j.design.srp;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
 import java.util.function.Predicate;
 
 public class HRReport implements Report {
@@ -22,8 +20,6 @@ public class HRReport implements Report {
         sortedEmployee.sort(comparator);
         for (Employee employee : sortedEmployee) {
             text.append(employee.getName()).append(";")
-                    .append(employee.getHired()).append(";")
-                    .append(employee.getFired()).append(";")
                     .append(employee.getSalary()).append(";")
                     .append(System.lineSeparator());
         }
