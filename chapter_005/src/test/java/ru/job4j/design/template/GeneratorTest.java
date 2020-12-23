@@ -1,4 +1,4 @@
-package ru.job4j.template;
+package ru.job4j.design.template;
 
 import org.junit.Ignore;
 import org.junit.Test;

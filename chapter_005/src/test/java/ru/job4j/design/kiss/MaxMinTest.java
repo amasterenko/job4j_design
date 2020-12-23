@@ -1,4 +1,4 @@
-package ru.job4j.kiss;
+package ru.job4j.design.kiss;
 
 import org.junit.Test;
 
