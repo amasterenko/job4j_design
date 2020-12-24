@@ -14,7 +14,7 @@ public class HRReport implements Report {
     @Override
     public String get(Predicate<Employee> filter, Store store) {
         StringBuilder text = new StringBuilder();
-        text.append("Name; Hired; Fired; Salary;");
+        text.append("Name; Salary;");
         text.append(System.lineSeparator());
         List<Employee> sortedEmployee = store.findBy(e -> true);
         sortedEmployee.sort(comparator);

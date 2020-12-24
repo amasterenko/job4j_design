@@ -61,7 +61,7 @@ public class ReportEngineTest {
         store.add(workers);
         Report report = new HRReport(Comparator.comparing(Employee::getSalary).reversed());
         ReportEngine engine = new ReportEngine(store, report);
-        StringBuilder expect = new StringBuilder("Name; Hired; Fired; Salary;").append(System.lineSeparator());
+        StringBuilder expect = new StringBuilder("Name; Salary;").append(System.lineSeparator());
                 for (int i = 2; i >= 0; i--) {
                 expect.append(workers.get(i).getName()).append(";")
                         .append(workers.get(i).getSalary()).append(";")
