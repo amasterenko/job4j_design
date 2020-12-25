@@ -38,10 +38,11 @@ public class ReportEngineTest {
         Employee worker = new Employee("Ivan", now, now, 150000);
         store.add(worker);
         double currencyRate = 75;
-        Report report = new AccountingReport("usd", currencyRate);
+        Converter currencyConverter = new RubToUsdConverter(currencyRate);
+        Report report = new AccountingReport(currencyConverter);
         ReportEngine engine = new ReportEngine(store, report);
         StringBuilder expect = new StringBuilder()
-                .append("Name; Hired; Fired; Salary(usd);")
+                .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(";")
                 .append(worker.getHired()).append(";")
