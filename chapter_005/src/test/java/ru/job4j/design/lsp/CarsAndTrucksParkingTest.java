@@ -1,6 +1,5 @@
 package ru.job4j.design.lsp;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -10,7 +9,6 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class CarsAndTrucksParkingTest {
-    @Ignore
     @Test
     public void whenNoVehiclesThenParkedListIsEmpty() {
         Parking parking = new CarsAndTrucksParking(10, 10);
@@ -18,7 +16,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void whenNoSpacesForParkingCarsAndTrucks() {
         Parking parking = new CarsAndTrucksParking(0, 0);
@@ -30,7 +27,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void when1Car1TruckParkAndUnpark() {
         Parking parking = new CarsAndTrucksParking(1, 1);
@@ -44,7 +40,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void whenAllVehiclesParkedInTheirSpaces() {
         Parking parking = new CarsAndTrucksParking(3, 2);
@@ -62,7 +57,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void when0SpaceForCars1SpaceForTrucksThenCarisNotParkedTruckIsParked() {
         Parking parking = new CarsAndTrucksParking(0, 1);
@@ -74,7 +68,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void when0SpaceForTrucksAnd1SpaceForCarsThenCarIsParkedTruckIsNotParked() {
         Parking parking = new CarsAndTrucksParking(1, 0);
@@ -86,7 +79,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void when0SpaceForTrucks3SpacesForCarsThen1CarAnd1TruckAreParked() {
         Parking parking = new CarsAndTrucksParking(3, 0);
@@ -98,7 +90,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void when1SpaceForTrucks2SpacesForCarsThen2TrucksAreParked() {
         Parking parking = new CarsAndTrucksParking(2, 1);
@@ -110,7 +101,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void whenNotEnoughSpaceForTruckThenTruckIsNotParked() {
         Parking parking = new CarsAndTrucksParking(2, 0);
@@ -120,7 +110,6 @@ public class CarsAndTrucksParkingTest {
         assertThat(parking.getParkedVehicles(), is(expected));
     }
 
-    @Ignore
     @Test
     public void when2NotConsecutiveSpacesForCarsThenTruckIsNotParked() {
         Parking parking = new CarsAndTrucksParking(2, 0);
