@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!-- Object Folder-->
+<folder name = "test" size = "1220" backup = "false">
+	<owner name = "username" id = "4039"/>
+	<atributes>
+		<atribute>read</atribute>
+		<atribute>ready</atribute>
+		<atribute>hidden</atribute>
+	</atributes>
+</folder>
